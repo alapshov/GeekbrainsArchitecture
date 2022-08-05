@@ -1,9 +1,6 @@
 package ru.geekbrains;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,32 +25,8 @@ public class RequestHandler implements Runnable {
                         socket.getInputStream(), StandardCharsets.UTF_8));
              PrintWriter output = new PrintWriter(socket.getOutputStream())
         ) {
-            while (!input.ready());
-
-            String firstLine = input.readLine();
-            String[] parts = firstLine.split(" ");
-            System.out.println(firstLine);
-            while (input.ready()) {
-                System.out.println(input.readLine());
-            }
-
-            Path path = Paths.get(folder, parts[1]);
-            if (!Files.exists(path)) {
-                output.println("HTTP/1.1 404 NOT_FOUND");
-                output.println("Content-Type: text/html; charset=utf-8");
-                output.println();
-                output.println("<h1>Файл не найден!</h1>");
-                output.flush();
-                return;
-            }
-
-            output.println("HTTP/1.1 200 OK");
-            output.println("Content-Type: text/html; charset=utf-8");
-            output.println();
-
-            Files.newBufferedReader(path).transferTo(output);
-
-            System.out.println("Client disconnected!");
+            String[] parts = new Handler().getPartsReadLine(input);
+            new ru.geekbrains.Files().fileRead(folder, parts, output);
         } catch (IOException e) {
             e.printStackTrace();
         }
