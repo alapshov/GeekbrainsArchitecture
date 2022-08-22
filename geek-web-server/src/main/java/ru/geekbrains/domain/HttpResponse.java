@@ -47,4 +47,36 @@ public class HttpResponse {
     public void setStatusCodeName(String statusCodeName) {
         this.statusCodeName = statusCodeName;
     }
+
+    public class Builder {
+        private final HttpResponse httpResponse;
+
+        public Builder() {
+            this.httpResponse = new HttpResponse();
+        }
+
+        public Builder withStatusCode(int statusCode){
+            this.httpResponse.statusCode = statusCode;
+            return this;
+        }
+
+        public Builder withStatusCodeName(String statusCodeName) {
+            this.httpResponse.statusCodeName = statusCodeName;
+            return this;
+        }
+
+        public Builder withHeaders(Map<String, String> headers) {
+            this.httpResponse.headers = headers;
+            return this;
+        }
+
+        public Builder withBody(String body) {
+            this.httpResponse.body = body;
+            return this;
+        }
+
+        public HttpResponse build() {
+            return httpResponse;
+        }
+    }
 }
