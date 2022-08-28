@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileService {
+public class FileService implements IFileService{
 
     private final String rootDir;
 
@@ -12,14 +12,17 @@ public class FileService {
         this.rootDir = rootDir;
     }
 
+    @Override
     public boolean exists(String filename) {
         return Files.exists(Path.of(rootDir, filename));
     }
 
+    @Override
     public boolean isDirectory(String filename) {
         return Files.isDirectory(Path.of(rootDir, filename));
     }
 
+    @Override
     public String readFile(String filename) {
         try {
             StringBuilder sb = new StringBuilder();

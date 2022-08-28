@@ -1,7 +1,8 @@
 package ru.geekbrains;
 
 import ru.geekbrains.config.*;
-import ru.geekbrains.service.FileService;
+import ru.geekbrains.factories.FileServiceFactory;
+import ru.geekbrains.factories.SocketServiceFactory;
 import ru.geekbrains.service.SocketService;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class WebServer {
                 System.out.println("New client connected!");
 
                 new Thread(new RequestHandler(
-                        new SocketService(socket),
-                        new FileService(config.getWww()),
+                        SocketServiceFactory.create(socket),
+                        FileServiceFactory.create(config.getWww()),
                         new RequestParser(),
                         new ResponseSerializer()
                 )).start();
