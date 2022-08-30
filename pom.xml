@@ -17,6 +17,8 @@
 
     <modules>
         <module>geek-web-server</module>
+        <module>examples</module>
+        <module>rx-web-server</module>
     </modules>
 
 </project>
