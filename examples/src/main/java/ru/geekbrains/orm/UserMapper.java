@@ -34,7 +34,7 @@ public class UserMapper {
             selectUser.setLong(1, id);
             ResultSet rs = selectUser.executeQuery();
             if (rs.next()) {
-                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+                user = new User(rs.getLong(1), rs.getString(2), rs.getString(3));
                 identityMap.put(id, user);
                 return Optional.of(user);
             }
@@ -45,11 +45,23 @@ public class UserMapper {
     }
 
     public void update(User user) {
-
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("No id in entity to update");
+        }
+        User oldUser = findById(user.getId()).orElseThrow(() -> new IllegalStateException("No entity with id"));
+        oldUser.setLogin(user.getLogin());
+        oldUser.setPassword(user.getPassword());
+        identityMap.put(oldUser.getId(), oldUser);
+        // TODO
     }
 
-    public void insert(User user) {
-
+    public User insert(User user) {
+        if (user.getId() != null) {
+            throw new IllegalArgumentException("New entity should not have id");
+        }
+        // TODO
+        //user.setId(...);
+        return null;
     }
 
     public void delete(User user) {

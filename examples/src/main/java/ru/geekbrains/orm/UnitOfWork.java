@@ -28,6 +28,8 @@ public class UnitOfWork {
     }
 
     public void commit() {
-
+        // begin transaction
+        // do all actions
+        // commit transaction
     }
 }

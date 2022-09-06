@@ -1,5 +1,7 @@
 package ru.geekbrains;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 public class Main {
@@ -21,5 +23,8 @@ public class Main {
         SomeClass first = new SomeClass("aaaa");
         SomeClass second = first.clone();
         System.out.println(second.field);
+
+        LocalDateTime now = LocalDateTime.now();
+
     }
 }

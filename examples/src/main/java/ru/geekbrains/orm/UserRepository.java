@@ -21,10 +21,6 @@ public class UserRepository {
         return Optional.empty();
     }
 
-    public void beginTransaction() {
-
-    }
-
     public void insert(User user) {
 
     }
@@ -34,14 +30,6 @@ public class UserRepository {
     }
 
     public void delete(User user) {
-
-    }
-
-    public void commitTransaction() {
-
-    }
-
-    public void rollbackTransaction() {
 
     }
 }
